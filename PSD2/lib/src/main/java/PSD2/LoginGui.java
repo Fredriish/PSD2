@@ -3,7 +3,6 @@ package PSD2;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
@@ -12,9 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.Insets;
-import java.awt.FlowLayout;
 import java.awt.Color;
-import java.util.regex.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
