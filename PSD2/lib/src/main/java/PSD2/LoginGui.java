@@ -14,6 +14,9 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.FlowLayout;
 import java.awt.Color;
+import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginGui {
 
@@ -85,7 +88,13 @@ public class LoginGui {
 		
 		loginButton = new JButton("Logga in");
 		loginButton.addActionListener(e ->{
-			//String parsedInfo = parseLoginInfo(personnummerInputField.getText());
+			String parsedInfo = parseLoginInfo(personnummerInputField.getText());
+			// TODO
+			if(parsedInfo.length()!=0)
+				System.out.println("success "+parsedInfo);//sendDataToBeAuthenticatedWithBankID(parsedInfo);
+			else
+				System.out.println("failure");
+			// above
 		});
 		GridBagConstraints gbc_loginButton = new GridBagConstraints();
 		gbc_loginButton.gridwidth = 7;
@@ -93,17 +102,25 @@ public class LoginGui {
 		gbc_loginButton.gridy = 4;
 		panel.add(loginButton, gbc_loginButton);
 	}
-	/*
+	
+	// parses a string into only being 10 digits or fail ""
+	// allowed characters are " " "-" and digits "0-9"
+	// will return a string that removes all the spaces and - and only contains 10 digits 
+	// otherwise it will return "".
 	private String parseLoginInfo(String input) {
-		String tmp="";
-		for(int a = 0;a<input.length();a++) {
-			if(input.charAt(a)==' ' || input.charAt(a)=='-') {
-				
-			}
-			else
-				tmp+=input.charAt(a);
+		String parsedInput="";		
+		for(int a = 0;a<input.length();a++) { // adds all characters that are not " " or "-"
+			if(!(input.charAt(a)==' ' || input.charAt(a)=='-')) 
+				parsedInput+=input.charAt(a);
 		}
 		
-		return tmp;
-	}*/
+		// regex allow 10 digits
+		final String personnummerPATTERN = "\\d{10}";
+		Pattern pattern = Pattern.compile(personnummerPATTERN);
+		Matcher matcher = pattern.matcher(parsedInput);
+		if(matcher.matches())
+			return parsedInput;
+		else
+			return "";
+	}
 }
